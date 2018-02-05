@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Buy4u-Broker</string>
+    <string name="action_settings">Settings</string>
+    <string name="album_view">Select Picture</string>
+    <string name="image_view">Choose Picture</string>
+    <string name="add">OK</string>
+    <string name="selected">Selected</string>
+    <string name="limit_exceeded">Maximum %d Picture</string>
+    <string name="facebook_app_id">aR1ahZ2x+aei5+c1dLZbd8wHQlo=</string>
+    <string name="fb_login_protocol_scheme">fbaR1ahZ2x+aei5+c1dLZbd8wHQlo=</string>
+
+
+
+    <string name="good"> Good</string>
+    <string name="normal"> Moderate</string>
+    <string name="notgood1" > Warning</string>
+    <string name="nothealth"> Unhealthy</string>
+    <string name="nogood"> Very Unhealthy</string>
+    <string name="dangerous"> Hazardous</string>
+</resources>

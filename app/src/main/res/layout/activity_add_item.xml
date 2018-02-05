@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="item"
+            type="com.jack.buy4u.Item"/>
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.jack.buy4u.AddItemActivity">
+
+        <ImageView
+            android:id="@+id/prev_photo"
+            android:layout_width="256dp"
+            android:layout_height="160dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/prev_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="TextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintEnd_toEndOf="@+id/prev_photo"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/prev_photo"
+            app:layout_constraintTop_toBottomOf="@+id/prev_photo" />
+
+        <TextView
+            android:id="@+id/prev_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="@+id/prev_name"
+            app:layout_constraintStart_toStartOf="@+id/prev_name"
+            app:layout_constraintTop_toBottomOf="@+id/prev_name" />
+
+        <Button
+            android:id="@+id/btn_selectImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Select Image"
+            app:layout_constraintStart_toStartOf="@+id/prev_info"
+            app:layout_constraintTop_toBottomOf="@+id/prev_info" />
+
+        <EditText
+            android:id="@+id/add_itemName"
+            android:layout_width="0dp"
+            android:text="@={item.name}"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Item name"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="@+id/prev_info"
+            app:layout_constraintStart_toStartOf="@+id/btn_selectImage"
+            app:layout_constraintTop_toBottomOf="@+id/btn_selectImage" />
+
+        <EditText
+            android:id="@+id/add_startTime"
+            android:layout_width="99dp"
+            android:text="@={item.starFormatted}"
+            android:layout_height="45dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:hint="2018-01-05"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="@+id/add_itemName"
+            app:layout_constraintTop_toBottomOf="@+id/add_itemName" />
+
+        <EditText
+            android:id="@+id/add_endTime"
+            android:layout_width="99dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:hint="2018-01-07"
+            android:inputType="textPersonName"
+            android:text="2018/02/02"
+            app:layout_constraintEnd_toEndOf="@+id/add_itemName"
+            app:layout_constraintTop_toBottomOf="@+id/add_itemName" />
+
+        <EditText
+            android:id="@+id/add_price"
+            android:layout_width="97dp"
+            android:text="@={item.priceString}"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:hint="Price"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="@+id/add_startTime"
+            app:layout_constraintTop_toBottomOf="@+id/add_startTime" />
+
+        <EditText
+            android:id="@+id/add_quantity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:hint="Quantity"
+            android:inputType="textPersonName"
+            android:text="3"
+            app:layout_constraintEnd_toEndOf="@+id/add_endTime"
+            app:layout_constraintStart_toEndOf="@+id/add_price"
+            app:layout_constraintTop_toBottomOf="@+id/add_endTime" />
+
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="32dp"
+            android:text="submit"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
