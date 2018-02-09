@@ -14,7 +14,7 @@ import java.util.Date;
 
 public class Item implements Serializable{
 
-    public static final int Version = 2;
+    public static final int Version = 1;
     public static final String TABLE = "items";
 
     public static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
@@ -38,7 +38,6 @@ public class Item implements Serializable{
             qtyString = qty+"";
         }
         return qtyString;
-
     }
 
     public void setQtyString(String qtyString) {
