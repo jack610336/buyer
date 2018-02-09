@@ -10,16 +10,27 @@ public class Order {
     int itemId;
     int groupId;
     int qty;
+    String itemName;
+
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
 
     public Order(){
 
     }
 
-    public Order(String uid, int itemId, int groupId, int qty) {
+    public Order(String uid, int itemId, int groupId, int qty , String itemName) {
         this.uid = uid;
         this.itemId = itemId;
         this.groupId = groupId;
         this.qty = qty;
+        this.itemName = itemName;
     }
 
     public String getUid() {

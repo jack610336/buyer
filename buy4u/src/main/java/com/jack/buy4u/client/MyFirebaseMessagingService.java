@@ -16,6 +16,5 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         super.onMessageReceived(remoteMessage);
         Log.d("FCM", "onMessageReceived: " + remoteMessage.getFrom() +"/" +
                 remoteMessage.getMessageType());
-
     }
 }

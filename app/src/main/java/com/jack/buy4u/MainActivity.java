@@ -90,11 +90,6 @@ public class MainActivity extends AppCompatActivity implements GroupDialogFragme
             showGroupNameDialog();
         }
 
-        // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
-
-        myRef.setValue("Hello, World!");
         //write to Firebase
 //        writeToFirebase();
 
@@ -105,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements GroupDialogFragme
         DatabaseReference contacts = firebase.getReference("contacts");
 
         FireBaseContacts c = new FireBaseContacts();
-        c.setName("TOM");
+        c.setName("JackWang");
         c.setPhone("09104587896");
         contacts.child("2").setValue(c).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -138,6 +133,7 @@ public class MainActivity extends AppCompatActivity implements GroupDialogFragme
 
     private void readFormFirebase() {
         FirebaseDatabase firebase = FirebaseDatabase.getInstance();//建立資料庫連線
+
         //參考遠端資料庫的 Reference
         //重資料庫取出contacts集合所有資料 也可以只取出特定位置 如下
         //firebase.getReference("contacts/xxx/fgf/cx");
@@ -150,14 +146,13 @@ public class MainActivity extends AppCompatActivity implements GroupDialogFragme
         //讀一個值，持續監聽，有改變時會監聽
         //contactsReference.addValueEventListener()
 
-
         contactsReference.addChildEventListener(new ChildEventListener() {
             @Override //資料來了會做的第一件事情
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 //firebase 讀回來的資料 可以直接在程式中 建立一個表格對應，直接將它塞進去本機的model
                 FireBaseContacts contacts = dataSnapshot.getValue(FireBaseContacts.class);
 
-                Log.e("sds", contacts.getName() + contacts.getPhone());
+                Log.e("ReadData ", contacts.getName() + contacts.getPhone());
             }
 
             @Override
@@ -208,12 +203,22 @@ public class MainActivity extends AppCompatActivity implements GroupDialogFragme
         });
     }
 
+
+
+
+
+
+
+
+
+
     private void uploadToFirebase() {
         if (items != null) {
 
             progressBar.setVisibility(View.VISIBLE);
             recyclerView.setAlpha(0.5f);
             progressBar.setMax(items.size());
+
             FirebaseDatabase firebase = FirebaseDatabase.getInstance();
             final DatabaseReference groups = firebase.getReference("groups");
             for (final Item item : items) {
@@ -232,6 +237,7 @@ public class MainActivity extends AppCompatActivity implements GroupDialogFragme
                 Uri uri = Uri.fromFile(new File(item.getPhotoPath()));// 路徑 轉 uri
 
                 StorageReference ref = FirebaseStorage.getInstance().getReference("photos"+item.getId());
+
                 ref.child(System.currentTimeMillis() + "");
                 ref.putFile(uri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override

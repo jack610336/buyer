@@ -11,11 +11,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -44,7 +49,7 @@ public class DetailActivity extends AppCompatActivity {
         btn_purchase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                buy(v);
             }
         });
         tv_qty.setText(String.valueOf(item.getQty()));
@@ -52,6 +57,11 @@ public class DetailActivity extends AppCompatActivity {
         tv_preName.setText(String.valueOf(item.getName()));
         tv_startTime.setText(String.valueOf(item.getStarFormatted()));
         tv_endTime.setText(String.valueOf(item.getEndFormatted()));
+//        imgv_PreProduct.setImageURI(Uri.fromFile(new File(item.getPhotoPath())));
+
+        Glide.with(this)
+                .load(item.getPhotoUrl())
+                .into(imgv_PreProduct);
     }
 
     private void findViews() {
@@ -65,13 +75,57 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     public void buy(View view) {
-        Order order = new Order(uid, item.getId(), item.getGroupId(), 1);
+
+        Order order = new Order(uid, item.getId(), item.getGroupId(), 1 , item.getName());
         DatabaseReference orders = FirebaseDatabase.getInstance()
                 .getReference("buyers")
                 .child(uid)
                 .child("orders").push();
         orders.setValue(order);
 
+        item.setQty(item.getQty() - 1);
+        FirebaseDatabase firebase = FirebaseDatabase.getInstance();
+
+        DatabaseReference updateReference = firebase.getReference("buyers");
+
+        updateReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                Order orderdata = dataSnapshot.getValue(Order.class);
+
+
+                FirebaseDatabase firebase = FirebaseDatabase.getInstance();
+                DatabaseReference updateref = firebase.getReference("groups");
+
+                        updateref.child("3")
+                        .child("items")
+                        .child(item.getId() + "")
+                        .setValue(item);
+
+                tv_qty.setText(String.valueOf(item.getQty()));
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
     }
 }
